@@ -1,9 +1,13 @@
-from flask import Flask, request, redirect, url_for, jsonify, send_from_directory, render_template
+from flask import Flask, request, redirect, url_for, jsonify, send_from_directory, render_template, flash
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user
+from werkzeug.security import check_password_hash
 import os
 import shutil
 import json
 
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/static')
+
+app.secret_key = 'd02d31d90bcc21e714841222d1e41add06a0f76daa48aab3'
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 images_dir = os.path.join(base_dir, 'images')
@@ -17,6 +21,23 @@ if not os.path.exists(trash_dir): os.makedirs(trash_dir)
 if not os.path.exists(users_file):
     with open(users_file, 'w') as f:
         json.dump({}, f)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+ADMIN_USERNAME = 'faith'
+ADMIN_PASSWORD_HASH = 'scrypt:32768:8:1$I657ZpQriNoY5tT9$1f0f30a986925e36bda94c9e12208a18853deb6af90f970649feb1213fe1128a73a62f49507d72d2b648f8e0b6212e127bd24cf9d88f7f2d9eef1cc609500c14'
+
+class AdminUser(UserMixin):
+    def __init__(self, username):
+        self.id = username
+
+@login_manager.user_loader
+def load_user(user_id):
+    if user_id == ADMIN_USERNAME:
+        return AdminUser(user_id)
+    return None
 
 def load_data():
     if not os.path.exists(data_file):
@@ -35,10 +56,6 @@ def index():
 @app.route('/gallery')
 def gallery():
     return render_template('gallery.html')
-
-@app.route('/admin')
-def admin():
-    return render_template('admin.html')
 
 @app.route('/static/images/<filename>')
 def serve_image(filename):
@@ -64,7 +81,7 @@ def register():
     return jsonify({"success": True})
 
 @app.route('/api/login', methods=['POST'])
-def login():
+def login_public():
     data = request.json
     email = data.get('email')
     password = data.get('password')
@@ -73,7 +90,34 @@ def login():
         return jsonify({"success": True})
     return jsonify({"success": False, "message": "Invalid email or password."})
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password):
+            login_user(AdminUser(username))
+            return redirect(url_for('admin'))
+        else:
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+    
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/admin')
+@login_required
+def admin():
+    return render_template('admin.html')
+
 @app.route('/api/save-page', methods=['POST'])
+@login_required
 def save_page():
     data = load_data()
     category = request.form.get('category')
@@ -92,6 +136,7 @@ def save_page():
     return redirect(url_for('admin'))
 
 @app.route('/api/add-page', methods=['POST'])
+@login_required
 def add_page():
     data = load_data()
     page_id = request.form.get('page_id').strip().lower().replace(' ', '-')
@@ -106,6 +151,7 @@ def add_page():
     return redirect(url_for('admin'))
 
 @app.route('/api/delete-page', methods=['POST'])
+@login_required
 def delete_page():
     category = request.form.get('category')
     data = load_data()
@@ -119,16 +165,19 @@ def delete_page():
     return redirect(url_for('admin'))
 
 @app.route('/api/images/<category>')
+@login_required
 def get_images(category):
     data = load_data()
     return jsonify(data['images'].get(category, []))
 
 @app.route('/api/trash')
+@login_required
 def get_trash():
     trashed_files = [f for f in os.listdir(trash_dir) if os.path.isfile(os.path.join(trash_dir, f))]
     return jsonify(trashed_files)
 
 @app.route('/upload', methods=['POST'])
+@login_required
 def upload():
     category = request.form.get('category')
     files = request.files.getlist('photo')
@@ -151,6 +200,7 @@ def upload():
     return "Error"
 
 @app.route('/delete', methods=['POST'])
+@login_required
 def delete_photo():
     category = request.form.get('category')
     filenames = request.form.getlist('filename')
@@ -167,6 +217,7 @@ def delete_photo():
     return redirect(url_for('admin'))
 
 @app.route('/undo', methods=['POST'])
+@login_required
 def undo_photo():
     category = request.form.get('category')
     filename = request.form.get('filename')
@@ -183,6 +234,7 @@ def undo_photo():
     return redirect(url_for('admin'))
 
 @app.route('/empty-trash', methods=['POST'])
+@login_required
 def empty_trash():
     filename = request.form.get('filename')
     if filename:
