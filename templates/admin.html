@@ -30,17 +30,15 @@
             color: var(--text-main); display: flex; height: 100vh; overflow: hidden; font-size: 15px; 
         }
 
-        /* --- DESKTOP SIDEBAR --- */
         .sidebar { 
             width: 280px; 
-            background: rgba(15, 23, 42, 0.9); 
+            background: rgba(15, 23, 42, 0.95); 
             backdrop-filter: blur(20px); 
             -webkit-backdrop-filter: blur(20px);
             color: white; display: flex; flex-direction: column; padding: 40px 25px; flex-shrink: 0; 
             border-right: 1px solid rgba(255, 255, 255, 0.1); 
             box-shadow: 4px 0 25px rgba(0,0,0,0.1);
             z-index: 100;
-            transition: transform 0.3s ease;
         }
         
         .sidebar h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 50px; text-align: center; }
@@ -48,7 +46,6 @@
         .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.1); color: white; transform: translateX(5px); }
         .sidebar .spacer { flex-grow: 1; }
 
-        /* --- MOBILE TOP BAR (HIDDEN ON DESKTOP) --- */
         .mobile-top-bar {
             display: none;
             position: fixed;
@@ -72,18 +69,24 @@
             color: white;
             font-size: 1.8rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* --- MAIN CONTENT --- */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 65px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 65px);
+            background: rgba(15, 23, 42, 0.6);
+            z-index: 90;
+        }
+
         .main-content { flex-grow: 1; overflow-y: auto; padding: 50px 60px; }
         .top-header { margin-bottom: 30px; color: var(--text-main); }
         .top-header h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
         .top-header p { color: var(--text-muted); margin-top: 8px; font-size: 1rem; font-weight: 500; letter-spacing: 1px; }
 
-        /* --- CARDS --- */
         .hero-card {
             background: rgba(248, 250, 252, 0.95); 
             backdrop-filter: blur(16px);
@@ -187,51 +190,31 @@
         .section-view.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ========================================================= */
-        /* --- MOBILE RESPONSIVE (HAMBURGER MENU & CENTERED CARDS) --- */
-        /* ========================================================= */
         @media (max-width: 900px) {
-            body { 
-                flex-direction: column; 
-                height: 100vh; 
-                overflow-y: auto; 
-            }
+            body { flex-direction: column; height: 100vh; overflow-y: auto; }
             
-            /* Show the top mobile bar */
-            .mobile-top-bar { 
-                display: flex; 
-            }
+            .mobile-top-bar { display: flex; }
 
-            /* Hide the sidebar by default, slide it in when active */
             .sidebar { 
                 position: fixed;
                 top: 65px; 
                 left: 0;
-                width: 100%;
+                width: 80%;
+                max-width: 320px;
                 height: calc(100vh - 65px);
                 background: rgba(15, 23, 42, 0.98);
                 transform: translateX(-100%); 
-                padding: 20px;
+                padding: 30px 20px;
                 z-index: 150;
             }
             
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
+            .sidebar.active { transform: translateX(0); }
             .sidebar h1 { display: none; }
+            .nav-link { font-size: 1.05rem; padding: 18px; }
+            .sidebar .spacer { display: none; }
             
-            .nav-link { 
-                font-size: 1.1rem;
-                padding: 20px;
-                justify-content: center;
-            }
+            .menu-overlay.active { display: block; }
 
-            .sidebar .spacer {
-                display: none;
-            }
-            
-            /* Center everything in the main content */
             .main-content { 
                 padding: 100px 20px 30px 20px; 
                 display: flex;
@@ -239,21 +222,10 @@
                 align-items: center;
             }
             
-            .top-header {
-                text-align: center;
-                width: 100%;
-                margin-bottom: 25px;
-            }
+            .top-header { text-align: center; width: 100%; margin-bottom: 25px; }
+            .top-header h2 { font-size: 1.8rem; }
+            .top-header p { font-size: 0.9rem; }
             
-            .top-header h2 { 
-                font-size: 1.8rem; 
-            }
-
-            .top-header p {
-                font-size: 0.9rem;
-            }
-            
-            /* Center the dashboard card and forms */
             .hero-card, .card { 
                 padding: 30px 25px; 
                 max-width: 100%;
@@ -263,44 +235,25 @@
                 align-items: center;
             }
 
-            .hero-card h2 {
-                font-size: 1.5rem;
-            }
+            .hero-card h2 { font-size: 1.5rem; }
+            .hero-card p { font-size: 0.95rem; margin-bottom: 25px; }
 
-            .hero-card p {
-                font-size: 0.95rem;
-                margin-bottom: 25px;
-            }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
+            .photo-card img { height: 120px; }
 
-            /* Adjust gallery grid for smaller screens */
-            .gallery-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
-                gap: 15px; 
-            }
-
-            .photo-card img { 
-                height: 120px; 
-            }
-
-            /* Fix toolbar layout */
-            .toolbar {
-                flex-direction: column;
-                gap: 15px;
-                align-items: center;
-                text-align: center;
-            }
+            .toolbar { flex-direction: column; gap: 15px; align-items: center; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Mobile Top Bar -->
     <div class="mobile-top-bar">
         <h1>WASH. STUDIO</h1>
         <button class="hamburger-btn" onclick="toggleMobileMenu()">&#9776;</button>
     </div>
 
-    <!-- Sidebar -->
+    <div class="menu-overlay" id="menu-overlay" onclick="toggleMobileMenu()"></div>
+
     <aside class="sidebar" id="sidebar">
         <h1>WASH. STUDIO</h1>
         <a class="nav-link active" onclick="switchTab('dashboard', this)">Dashboard</a>
@@ -451,6 +404,7 @@
 
         function toggleMobileMenu() {
             document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('menu-overlay').classList.toggle('active');
         }
 
         function switchTab(tabId, element) {
@@ -462,8 +416,8 @@
             
             if (tabId === 'page-details') loadPageDetails();
 
-            // Close the mobile menu after selecting a tab
             document.getElementById('sidebar').classList.remove('active');
+            document.getElementById('menu-overlay').classList.remove('active');
         }
 
         async function fetchData() {
