@@ -155,13 +155,99 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 768px) {
-            body { flex-direction: column; overflow: auto; }
-            .sidebar { width: 100%; flex-direction: row; padding: 20px; overflow-x: auto; }
-            .sidebar h1 { display: none; }
-            .nav-link { margin-bottom: 0; white-space: nowrap; }
-            .main-content { padding: 30px 20px; }
-            .hero-card { padding: 30px 20px; }
-            .top-header h2 { font-size: 2rem; }
+            body { 
+                flex-direction: column; 
+                height: auto; 
+                overflow-y: auto; 
+                overflow-x: hidden;
+            }
+            
+            .sidebar { 
+                width: 100%; 
+                flex-direction: row; 
+                padding: 15px 10px; 
+                overflow-x: auto; 
+                white-space: nowrap;
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                justify-content: flex-start;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .sidebar h1 { 
+                display: none; 
+            }
+            
+            .nav-link { 
+                margin-bottom: 0; 
+                padding: 10px 15px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+            
+            .nav-link:hover, .nav-link.active {
+                transform: none;
+            }
+
+            .sidebar .spacer {
+                display: none;
+            }
+            
+            .main-content { 
+                padding: 20px 15px; 
+            }
+            
+            .top-header h2 { 
+                font-size: 1.6rem; 
+            }
+
+            .top-header p {
+                font-size: 0.85rem;
+            }
+            
+            .hero-card { 
+                padding: 25px 20px; 
+                max-width: 100%;
+            }
+
+            .hero-card h2 {
+                font-size: 1.4rem;
+            }
+
+            .hero-card p {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+            
+            .card {
+                padding: 20px;
+                max-width: 100% !important;
+            }
+
+            .gallery-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+                gap: 15px; 
+            }
+
+            .photo-card img { 
+                height: 100px; 
+            }
+
+            .toolbar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .toolbar-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .trash-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
