@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Washington Photography - Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>MY GALLERY<br>0721120228</h1>
+            <p>SEPTEMBER 9TH, 2023</p>
+            <a href="#gallery-grid" class="btn-view">VIEW GALLERY</a>
+        </div>
+        <div class="hero-footer">
+            <p>WASHINGTON PHOTOGRAPHY</p>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <header class="top-bar">
+            
+            <div class="brand">
+                <h1 id="dynamic-title">MY GALLERY 0721120228</h1>
+                <p class="subtitle">WASHINGTON PHOTOGRAPHY</p>
+            </div>
+
+            <nav class="nav-links">
+                <a href="gallery.html?cat=washington" data-cat="washington">WASHINGTON</a>
+                <a href="gallery.html?cat=weddings" data-cat="weddings">WEDDINGS</a>
+                <a href="gallery.html?cat=baby-showers" data-cat="baby-showers">BABY SHOWERS</a>
+                <a href="gallery.html?cat=portraits" data-cat="portraits">POTRAITS</a>
+                
+                <div class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown(event)">MORE &#8964;</a>
+                    <div class="dropdown-content">
+                        <a href="gallery.html?cat=traditional-weddings">TRADITIONAL WEDDINGS</a>
+                        <a href="gallery.html?cat=wild-safaris">WILD & SAFARIS</a>
+                        <a href="gallery.html?cat=drone-shots">DRONE SHOTS</a>
+                        <a href="gallery.html?cat=bereavements">BEREAVEMENTS</a>
+                        <a href="gallery.html?cat=food">FOOD</a>
+                        <a href="gallery.html?cat=graduations">GRADUATIONS</a>
+                        <a href="gallery.html?cat=corporate-events">CORPORATE EVENTS</a>
+                        <a href="gallery.html?cat=parties">PARTIES</a>
+                        <a href="gallery.html?cat=hang-outs">HANG OUTS</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="action-icons">
+                <button onclick="toggleFavorite()" id="heart-btn">
+                    <span class="heart" id="heart-icon">&#9825;</span>
+                </button>
+                <button onclick="attemptDownload()">
+                    &#11123;
+                </button>
+                <button onclick="toggleDotsMenu(event)">
+                    &#8942;
+                </button>
+                <div class="dots-menu" id="dots-menu">
+                    <a href="javascript:void(0)" onclick="alert('Share link copied to clipboard!')"><span>&#8618;</span> SHARE</a>
+                    <a href="javascript:void(0)" onclick="alert('Starting slideshow...')"><span>&#9654;</span> SLIDESHOW</a>
+                </div>
+            </div>
+        </header>
+
+        <p class="description" id="dynamic-description"></p>
+        
+        <div class="masonry-grid" id="gallery-grid"></div>
+
+        <div class="view-more-container">
+            <button class="view-more-btn" onclick="goToNextCategory()">VIEW MORE</button>
+        </div>
+    </main>
+
+    <div id="favorites-view">
+        <div class="fav-header">
+            <button class="back-btn" onclick="closeFavoritesView()">&#8592; Back to Gallery</button>
+            <h2>YOUR FAVORITES</h2>
+            <div></div> 
+        </div>
+        <div class="masonry-grid" id="favorites-grid"></div>
+    </div>
+
+    <div id="email-modal" class="modal-overlay">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-modal" onclick="closeModal('email-modal')">&times;</span>
+            <h2 style="margin-top: 20px; margin-bottom: 20px; letter-spacing: 1px;">DOWNLOAD PHOTOS</h2>
+            <p style="margin-bottom: 30px; color: #555;">Your email will be used to notify you when the files are ready for download.</p>
+            <input type="email" id="download-email" placeholder="Your Email" style="text-align: center; margin-bottom: 30px; width: 100%; padding: 15px; border: 1px solid #ddd;">
+            <button class="modal-btn" onclick="processEmailNext()" style="padding: 15px;">NEXT</button>
+        </div>
+    </div>
+
+    <div id="checkout-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 600px; text-align: left; padding: 40px;">
+            <span class="close-modal" onclick="closeModal('checkout-modal')">&times;</span>
+            
+            <h2 style="margin-bottom: 30px; font-weight: 600;">Download Options</h2>
+            
+            <h3 style="margin-bottom: 15px; font-weight: normal; font-size: 1.1rem;">Choose Photos:</h3>
+            <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem;">
+                <span><input type="checkbox" checked style="margin-right: 15px;"> WASHINGTON</span>
+                <span style="color:#888;">1 photo</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem;">
+                <span><input type="checkbox" style="margin-right: 15px;"> WEDDINGS</span>
+                <span style="color:#888;">33 photos</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 0.9rem;">
+                <span><input type="checkbox" style="margin-right: 15px;"> BABY SHOWERS</span>
+                <span style="color:#888;">20 photos</span>
+            </div>
+            
+            <h3 style="margin-top: 30px; margin-bottom: 15px; font-weight: normal; font-size: 1.1rem;">Choose Download Size:</h3>
+            <label style="display: block; margin-bottom: 12px; cursor: pointer; font-size: 0.9rem;">
+                <input type="radio" name="size" value="high" checked style="margin-right: 10px;"> High Resolution
+            </label>
+            <label style="display: block; margin-bottom: 12px; cursor: pointer; font-size: 0.9rem;">
+                <input type="radio" name="size" value="web" style="margin-right: 10px;"> Web Size
+            </label>
+
+            <h3 style="margin-top: 30px; margin-bottom: 15px; font-weight: normal; font-size: 1.1rem;">Download To:</h3>
+            
+            <div class="download-option selected" onclick="selectDownloadOption(this)">
+                <span>&#10003; &nbsp; Save to My Device</span>
+            </div>
+            <div class="download-option" onclick="selectDownloadOption(this)">
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save to Google Photos</span>
+            </div>
+            <div class="download-option" onclick="selectDownloadOption(this)">
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save to Dropbox</span>
+            </div>
+
+            <button class="modal-btn" onclick="executeFinalDownload()" style="margin-top: 30px; padding: 15px;">START DOWNLOAD</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            document.querySelector('.dropdown').classList.toggle('active');
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentCat = urlParams.get('cat') || 'washington';
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                if (link.dataset.cat === currentCat) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

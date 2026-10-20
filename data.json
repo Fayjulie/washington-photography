@@ -1,0 +1,133 @@
+{
+    "pages": {
+        "washington": {
+            "title": "MY GALLERY - WASHINGTON",
+            "description": "A versatile photographer with over three years of experience, skilled in capturing diverse moments from portraits to landscapes. Known for creativity, adaptability, and a keen eye for detail, I deliver high-quality, timeless images. Their passion for storytelling through photography makes them a reliable professional for any occasion or project."
+        },
+        "weddings": {
+            "title": "MY GALLERY - WEDDINGS",
+            "description": "Every moment is worth a click!!! A versatile wedding photographer with over three years of experience, capturing love stories with elegance and authenticity. Skilled in candid and traditional styles, they create timeless memories filled with emotion and detail. Their professionalism, creativity, and ability to adapt to any setting make them a trusted choice for unforgettable wedding moments."
+        },
+        "baby-showers": {
+            "title": "MY GALLERY - BABY SHOWERS",
+            "description": "dedicated photographer with over three years of experience in maternity photography, specializing in capturing the glow of motherhood. With a keen eye for detail and creativity, they produce elegant and heartfelt images. Their professionalism and warm approach make every session comfortable, ensuring timeless memories for expectant mothers and families."
+        },
+        "portraits": {
+            "title": "MY GALLERY - POTRAITS",
+            "description": "A skilled photographer with over three years of experience in portrait photography, known for capturing authentic expressions and unique personalities. With creativity and precision, they craft timeless portraits that reflect emotion and character. Their professionalism and adaptability make every session enjoyable, resulting in high-quality images that clients proudly treasure."
+        },
+        "traditional-weddings": {
+            "title": "MY GALLERY - TRADITIONAL WEDDINGS",
+            "description": "A professional photographer experienced in the industry, specializing in traditional wedding photography. Skilled in capturing timeless moments, rituals, and cultural details, they create elegant, classic images that preserve cherished memories. Their expertise, creativity, and dedication ensure every couple's special day is beautifully documented and remembered."
+        },
+        "wild-safaris": {
+            "title": "MY GALLERY - WILD & SAFARIS",
+            "description": "A passionate photographer with over three years of experience in wildlife photography, capturing the raw beauty of nature and animals in their natural habitats. With patience, precision, and a creative eye, they produce powerful, storytelling images. Their work reflects dedication to preserving wildlife moments and inspiring appreciation for the natural world."
+        },
+        "drone-shots": {
+            "title": "MY GALLERY - DRONE SHOTS",
+            "description": "A skilled photographer with over three years of experience in aerial drone photography, capturing breathtaking perspectives from above. Specializing in landscapes, events, and real estate, they combine technical expertise with artistic vision. Their precision and creativity ensure stunning high-quality visuals that showcase scenes in unique and compelling ways."
+        },
+        "bereavements": {
+            "title": "MY GALLERY - BEREAVEMENTS",
+            "description": "A compassionate photographer with over three years of experience in bereavement photography, dedicated to capturing tender, respectful memories during moments of loss. With sensitivity and professionalism, they create meaningful images that honor loved ones. Their work provides families with lasting comfort, preserving emotions and connections in a heartfelt, dignified manner."
+        },
+        "food": {
+            "title": "MY GALLERY - FOOD",
+            "description": "A food photographer with over three years of experience, skilled in capturing appetizing, high-quality images. With creativity and precision, they highlight textures, colors, and details, bringing dishes to life. Their work blends artistry and professionalism, delivering visually appealing photos that elevate culinary presentations for restaurants, brands, and publications."
+        },
+        "graduations": {
+            "title": "MY GALLERY - GRADUATIONS",
+            "description": "A professional photographer with over three years of experience in graduation photography, specializing in capturing memorable milestones with creativity and style. Skilled at highlighting joy, pride, and achievement, they deliver high-quality portraits and candid moments. Their dedication ensures timeless images that celebrate graduates' success and mark the beginning of new journeys."
+        },
+        "corporate-events": {
+            "title": "MY GALLERY - CORPORATE EVENTS",
+            "description": "A corporate events photographer with industry experience, skilled in capturing conferences, product launches, and networking moments. Professional, discreet, and adaptable, delivers polished images that reflect brand identity and atmosphere. Their attention to detail and timely delivery provide companies with compelling visual assets for marketing and archives."
+        },
+        "parties": {
+            "title": "MY GALLERY - PARTIES",
+            "description": "A corporate events photographer with industry experience, skilled in capturing conferences, product launches, and networking moments. Professional, discreet, and adaptable, delivers polished images that reflect brand identity and atmosphere. Their attention to detail and timely delivery provide companies with compelling visual assets for marketing and archives."
+        },
+        "hang-outs": {
+            "title": "MY GALLERY - HANG OUTS",
+            "description": "A corporate events photographer with industry experience, skilled in capturing conferences, product launches, and networking moments. Professional, discreet, and adaptable, delivers polished images that reflect brand identity and atmosphere. Their attention to detail and timely delivery provide companies with compelling visual assets for marketing and archives."
+        }
+    },
+    "images": {
+        "washington": [
+            "hero.jpeg"
+        ],
+        "weddings": [
+            "DSC_2077b - Copy.jpg",
+            "DSC_2077b.jpg",
+            "DSC_4363 - Copy.jpg",
+            "DSC_4363.jpg",
+            "DSC_4377-2 - Copy.jpg",
+            "DSC_4377-2.jpg",
+            "DSC_4401 - Copy.JPG",
+            "DSC_4401.JPG",
+            "DSC_4403 - Copy.jpg",
+            "DSC_4403.jpg",
+            "DSC_4404 - Copy.JPG",
+            "DSC_4404.JPG",
+            "DSC_4406.JPG",
+            "DSC_4443-2.jpg",
+            "DSC_4452.JPG",
+            "DSC_4461.JPG",
+            "IMG-20250720-WA0000.jpg",
+            "IMG-20250720-WA0001.jpg",
+            "IMG-20250720-WA0002.jpg",
+            "IMG-20250720-WA0003.jpg",
+            "IMG-20250720-WA0004.jpg",
+            "IMG-20250720-WA0005.jpg",
+            "IMG-20250720-WA0015.jpg",
+            "IMG-20250720-WA0016.jpg",
+            "IMG-20250720-WA0019.jpg",
+            "IMG-20250720-WA0024.jpg",
+            "IMG-20250720-WA0026.jpg",
+            "KNP03432.jpg",
+            "SK.jpg",
+            "SK2.jpg",
+            "UMC_4105.jpg",
+            "UMC_4426.jpg",
+            "UMC_4427.jpg",
+            "WWP_4291.JPG",
+            "WWP_9458.JPG",
+            "WWP_9636.JPG",
+            "WWP_9663.JPG",
+            "WWP_9698.JPG",
+            "WWP_9704.JPG"
+        ],
+        "baby-showers": [
+            "DSC_5773.jpg",
+            "DSC_5789.jpg",
+            "DSC_5888.jpg",
+            "DSC_6225.JPG",
+            "DSC_6236.JPG",
+            "DSC_6240.JPG",
+            "DSC_6242.JPG",
+            "DSC_6259.JPG",
+            "DSC_6265.JPG",
+            "DSC_6276.JPG",
+            "DSC_6293.JPG",
+            "DSC_6303.JPG",
+            "DSC_6311.JPG",
+            "DSC_6312.JPG",
+            "LK-79.jpg",
+            "LK-80.jpg",
+            "LK-88.jpg",
+            "LK-150.jpg",
+            "DSC_6227.JPG"
+        ],
+        "portraits": [],
+        "traditional-weddings": [],
+        "wild-safaris": [],
+        "drone-shots": [],
+        "bereavements": [],
+        "food": [],
+        "graduations": [],
+        "corporate-events": [],
+        "parties": [],
+        "hang-outs": []
+    }
+}
