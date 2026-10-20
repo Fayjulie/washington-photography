@@ -30,6 +30,7 @@
             color: var(--text-main); display: flex; height: 100vh; overflow: hidden; font-size: 15px; 
         }
 
+        /* --- DESKTOP SIDEBAR --- */
         .sidebar { 
             width: 280px; 
             background: rgba(15, 23, 42, 0.9); 
@@ -38,7 +39,8 @@
             color: white; display: flex; flex-direction: column; padding: 40px 25px; flex-shrink: 0; 
             border-right: 1px solid rgba(255, 255, 255, 0.1); 
             box-shadow: 4px 0 25px rgba(0,0,0,0.1);
-            z-index: 10;
+            z-index: 100;
+            transition: transform 0.3s ease;
         }
         
         .sidebar h1 { font-size: 1.2rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 50px; text-align: center; }
@@ -46,13 +48,44 @@
         .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.1); color: white; transform: translateX(5px); }
         .sidebar .spacer { flex-grow: 1; }
 
+        /* --- MOBILE TOP BAR (HIDDEN ON DESKTOP) --- */
+        .mobile-top-bar {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 15px 20px;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 200;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 65px;
+        }
+        .mobile-top-bar h1 { font-size: 1rem; font-weight: 800; letter-spacing: 2px; }
+        .hamburger-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- MAIN CONTENT --- */
         .main-content { flex-grow: 1; overflow-y: auto; padding: 50px 60px; }
         .top-header { margin-bottom: 30px; color: var(--text-main); }
         .top-header h2 { font-size: 2.2rem; font-weight: 800; color: #0f172a; letter-spacing: -1px; }
         .top-header p { color: var(--text-muted); margin-top: 8px; font-size: 1rem; font-weight: 500; letter-spacing: 1px; }
 
+        /* --- CARDS --- */
         .hero-card {
-            background: rgba(248, 250, 252, 0.85); 
+            background: rgba(248, 250, 252, 0.95); 
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: 20px;
@@ -79,7 +112,7 @@
         .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4); }
 
         .card { 
-            background: rgba(248, 250, 252, 0.85); 
+            background: rgba(248, 250, 252, 0.95); 
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-radius: var(--radius); 
@@ -154,106 +187,121 @@
         .section-view.active { display: block; animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        @media (max-width: 768px) {
+        /* ========================================================= */
+        /* --- MOBILE RESPONSIVE (HAMBURGER MENU & CENTERED CARDS) --- */
+        /* ========================================================= */
+        @media (max-width: 900px) {
             body { 
                 flex-direction: column; 
-                height: auto; 
+                height: 100vh; 
                 overflow-y: auto; 
-                overflow-x: hidden;
             }
             
+            /* Show the top mobile bar */
+            .mobile-top-bar { 
+                display: flex; 
+            }
+
+            /* Hide the sidebar by default, slide it in when active */
             .sidebar { 
-                width: 100%; 
-                flex-direction: row; 
-                padding: 15px 10px; 
-                overflow-x: auto; 
-                white-space: nowrap;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                justify-content: flex-start;
-                align-items: center;
-                gap: 10px;
+                position: fixed;
+                top: 65px; 
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 65px);
+                background: rgba(15, 23, 42, 0.98);
+                transform: translateX(-100%); 
+                padding: 20px;
+                z-index: 150;
             }
             
-            .sidebar h1 { 
-                display: none; 
+            .sidebar.active {
+                transform: translateX(0);
             }
+
+            .sidebar h1 { display: none; }
             
             .nav-link { 
-                margin-bottom: 0; 
-                padding: 10px 15px;
-                font-size: 0.85rem;
-                white-space: nowrap;
-            }
-            
-            .nav-link:hover, .nav-link.active {
-                transform: none;
+                font-size: 1.1rem;
+                padding: 20px;
+                justify-content: center;
             }
 
             .sidebar .spacer {
                 display: none;
             }
             
+            /* Center everything in the main content */
             .main-content { 
-                padding: 20px 15px; 
+                padding: 100px 20px 30px 20px; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .top-header {
+                text-align: center;
+                width: 100%;
+                margin-bottom: 25px;
             }
             
             .top-header h2 { 
-                font-size: 1.6rem; 
+                font-size: 1.8rem; 
             }
 
             .top-header p {
-                font-size: 0.85rem;
+                font-size: 0.9rem;
             }
             
-            .hero-card { 
-                padding: 25px 20px; 
+            /* Center the dashboard card and forms */
+            .hero-card, .card { 
+                padding: 30px 25px; 
                 max-width: 100%;
+                width: 100%;
+                margin: 0 auto;
+                text-align: center;
+                align-items: center;
             }
 
             .hero-card h2 {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
 
             .hero-card p {
                 font-size: 0.95rem;
-                margin-bottom: 20px;
-            }
-            
-            .card {
-                padding: 20px;
-                max-width: 100% !important;
+                margin-bottom: 25px;
             }
 
+            /* Adjust gallery grid for smaller screens */
             .gallery-grid { 
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); 
                 gap: 15px; 
             }
 
             .photo-card img { 
-                height: 100px; 
+                height: 120px; 
             }
 
+            /* Fix toolbar layout */
             .toolbar {
                 flex-direction: column;
                 gap: 15px;
-                align-items: flex-start;
-            }
-
-            .toolbar-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .trash-actions {
-                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
 
-    <aside class="sidebar">
+    <!-- Mobile Top Bar -->
+    <div class="mobile-top-bar">
+        <h1>WASH. STUDIO</h1>
+        <button class="hamburger-btn" onclick="toggleMobileMenu()">&#9776;</button>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
         <h1>WASH. STUDIO</h1>
         <a class="nav-link active" onclick="switchTab('dashboard', this)">Dashboard</a>
         <a class="nav-link" onclick="switchTab('upload', this)">Upload Photos</a>
@@ -363,12 +411,12 @@
                 <p>View uploaded photos, select them to delete, or recover from the trash.</p>
             </header>
             <div class="card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; width: 100%;">
                     <h3 style="margin:0; font-size: 1.3rem; color: var(--text-main);">Uploaded Photos</h3>
                     <select id="manage-category" class="form-control" style="width: auto; padding: 12px; font-weight: 600;" onchange="loadPhotos()"></select>
                 </div>
 
-                <form id="delete-form" action="/delete" method="POST">
+                <form id="delete-form" action="/delete" method="POST" style="width: 100%;">
                     <input type="hidden" name="category" id="delete-category" value="">
                     <div class="toolbar" id="toolbar" style="display: none;">
                         <span style="font-weight: 600; color: #334155;"><strong id="selected-count" style="color: var(--primary); font-size: 1.1rem;">0</strong> photos selected</span>
@@ -380,7 +428,7 @@
                     <div class="gallery-grid" id="photo-grid"></div>
                 </form>
 
-                <div class="trash-section">
+                <div class="trash-section" style="width: 100%;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3 style="color: var(--danger); margin:0; font-size: 1.3rem;">Trash</h3>
                         <button type="button" class="btn btn-danger" onclick="emptyTrash()" style="padding: 10px 20px; font-size: 0.9rem;">Empty Trash</button>
@@ -401,6 +449,10 @@
         let globalData = null;
         let isAllSelected = false;
 
+        function toggleMobileMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
         function switchTab(tabId, element) {
             document.querySelectorAll('.section-view').forEach(view => view.classList.remove('active'));
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
@@ -409,6 +461,9 @@
             if (element) element.classList.add('active');
             
             if (tabId === 'page-details') loadPageDetails();
+
+            // Close the mobile menu after selecting a tab
+            document.getElementById('sidebar').classList.remove('active');
         }
 
         async function fetchData() {
