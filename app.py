@@ -6,8 +6,8 @@ import json
 app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/static')
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-images_dir = os.path.join(base_dir, 'static', 'images')
-trash_dir = os.path.join(base_dir, 'static', 'trash')
+images_dir = os.path.join(base_dir, 'images')
+trash_dir = os.path.join(base_dir, 'trash')
 users_file = os.path.join(base_dir, 'users.json')
 data_file = os.path.join(base_dir, 'data.json')
 
@@ -40,7 +40,11 @@ def gallery():
 def admin():
     return render_template('admin.html')
 
-@app.route('/trash/<filename>')
+@app.route('/static/images/<filename>')
+def serve_image(filename):
+    return send_from_directory(images_dir, filename)
+
+@app.route('/static/trash/<filename>')
 def serve_trash(filename):
     return send_from_directory(trash_dir, filename)
 
