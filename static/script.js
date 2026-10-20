@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (images.length > 0) {
             images.forEach(imgSrc => {
                 const img = document.createElement('img');
-                img.src = `images/${imgSrc}`; 
+                img.src = `/static/images/${imgSrc}`; 
                 img.onclick = function() { 
                     photoToDownload = this.src; 
                     attemptDownload(); 
@@ -66,9 +66,9 @@ function goToNextCategory() {
 
     if (currentIndex !== -1 && currentIndex < categoryOrder.length - 1) {
         let nextCategory = categoryOrder[currentIndex + 1];
-        window.location.href = `gallery.html?cat=${nextCategory}`;
+        window.location.href = `gallery?cat=${nextCategory}`;
     } else {
-        window.location.href = `gallery.html?cat=${categoryOrder[0]}`;
+        window.location.href = `gallery?cat=${categoryOrder[0]}`;
     }
 }
 

@@ -1,13 +1,13 @@
-from flask import Flask, request, redirect, url_for, jsonify, send_from_directory
+from flask import Flask, request, redirect, url_for, jsonify, send_from_directory, render_template
 import os
 import shutil
 import json
 
-app = Flask(__name__, static_folder='', static_url_path='')
+app = Flask(__name__, template_folder='templates', static_folder='static', static_url_path='/static')
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
-images_dir = os.path.join(base_dir, 'images')
-trash_dir = os.path.join(base_dir, 'trash')
+images_dir = os.path.join(base_dir, 'static', 'images')
+trash_dir = os.path.join(base_dir, 'static', 'trash')
 users_file = os.path.join(base_dir, 'users.json')
 data_file = os.path.join(base_dir, 'data.json')
 
@@ -30,17 +30,19 @@ def save_data(data):
 
 @app.route('/')
 def index():
-    with open('index.html', 'r', encoding='utf-8') as file:
-        return file.read()
+    return render_template('index.html')
+
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
 
 @app.route('/trash/<filename>')
 def serve_trash(filename):
     return send_from_directory(trash_dir, filename)
-
-@app.route('/admin')
-def admin():
-    with open('admin.html', 'r', encoding='utf-8') as file:
-        return file.read()
 
 @app.route('/api/data')
 def get_data():

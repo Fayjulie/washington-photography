@@ -23,7 +23,7 @@
         
         body { 
             background-color: #e2e8f0; 
-            background-image: linear-gradient(rgba(241, 245, 249, 0.85), rgba(241, 245, 249, 0.92)), url('images/hero.jpeg');
+            background-image: linear-gradient(rgba(241, 245, 249, 0.85), rgba(241, 245, 249, 0.92)), url('/static/images/hero.jpeg');
             background-size: cover;
             background-position: center top;
             background-attachment: fixed;
@@ -394,7 +394,7 @@
                     <div class="checkbox-wrapper">
                         <input type="checkbox" name="filename" value="${img}" onclick="updateToolbar()">
                     </div>
-                    <img src="images/${img}" onclick="openLightbox(this.src)">
+                    <img src="/static/images/${img}" onclick="openLightbox(this.src)">
                 `;
                 grid.appendChild(card);
             });
@@ -439,7 +439,7 @@
                     const card = document.createElement('div');
                     card.className = 'photo-card';
                     card.innerHTML = `
-                        <img src="/trash/${img}" onclick="openLightbox(this.src)">
+                        <img src="/static/trash/${img}" onclick="openLightbox(this.src)">
                         <div class="trash-actions">
                             <form action="/undo" method="POST" style="margin:0;">
                                 <input type="hidden" name="category" value="${category}">
